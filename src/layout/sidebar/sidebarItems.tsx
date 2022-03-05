@@ -1,9 +1,9 @@
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import {Divider, ListItemIcon, ListItemText, MenuItem, MenuList, Typography} from "@mui/material";
+import {Avatar, Box, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {makeStyles} from "@mui/styles";
+import {createStyles, makeStyles, withStyles, WithStyles} from "@mui/styles";
 
 const useStyles = makeStyles({
     menu: {
@@ -11,6 +11,15 @@ const useStyles = makeStyles({
     },
     menuItems: {
         borderRadius: '10px',
+        height: '45px',
+        '&:hover': {
+            backgroundColor: '#E9DDFE',
+        },
+    },
+    userPaper: {
+        backgroundColor: '#6750A4',
+        margin: '16px',
+        padding: '16px',
     },
 })
 
@@ -22,7 +31,7 @@ interface AreaData {
 
 const SidebarItems: React.FC = () => {
 
-    const classes = useStyles();
+    const  classes = useStyles();
 
     const bodyAreaData: AreaData[] = [
         {
@@ -107,28 +116,38 @@ const SidebarItems: React.FC = () => {
 
     return(
       <>
+          <Paper elevation={4}
+                 className={classes.userPaper}>
+              <Avatar variant="rounded">
+                  JH
+              </Avatar>
+          </Paper>
+
           <MenuList className={classes.menu}>
-              <Typography>
-                  Körperdaten
-              </Typography>
-              { displayAreaData(bodyAreaData) }
-              <Divider />
+              <Box mb={5}>
+                  <Typography>
+                      KÖRPERDATEN
+                  </Typography>
+                  { displayAreaData(bodyAreaData) }
+              </Box>
 
+              <Box mb={5}>
+                  <Typography>
+                      Training
+                  </Typography>
+                  { displayAreaData(trainingAreaData) }
+              </Box>
 
-              <Typography>
-                  Training
-              </Typography>
-              { displayAreaData(trainingAreaData) }
-              <Divider />
-
-              <Typography>
-                  Benutzer
-              </Typography>
-              { displayAreaData(userAreaData) }
+              <Box mb={5}>
+                  <Typography>
+                      Benutzer
+                  </Typography>
+                  { displayAreaData(userAreaData) }
+              </Box>
           </MenuList>
 
       </>
     );
 }
 
-export default SidebarItems
+export default SidebarItems;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Drawer, IconButton} from "@mui/material";
+import {Drawer, IconButton} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import SidebarItems from "./sidebarItems";
 
@@ -26,16 +26,6 @@ const Sidebar: React.FC = () => {
 
     return (
         <>
-            <Box
-                sx={{
-                    width: 300,
-                    height: 300,
-                    backgroundColor: 'grey',
-                }}
-            >
-                <img src='../../assets/images/logoWithWriting.png'/>
-            </Box>
-
             <Drawer
                 variant="temporary"
                 open={mobileOpen}
@@ -54,7 +44,7 @@ const Sidebar: React.FC = () => {
                 variant="permanent"
                 sx={{
                     display: { xs: 'none', sm: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300 },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300, border: 'unset' },
                 }}
                 open
             >
