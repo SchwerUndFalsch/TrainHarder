@@ -1,11 +1,19 @@
 import React from 'react';
-import Test from "./components/user/test";
+import Layout from './layout/Layout';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import User from "./pages/user/user";
+import Homepage from "./pages/index/homepage";
 
 function App() {
   return (
-    <div className="App">
-      <Test />
-    </div>
+    <BrowserRouter>
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Homepage />}/>
+                <Route path="/user" element={<User />}/>
+            </Routes>
+        </Layout>
+    </BrowserRouter>
   );
 }
 
