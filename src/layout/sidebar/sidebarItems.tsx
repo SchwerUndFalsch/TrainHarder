@@ -1,27 +1,34 @@
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import {Avatar, Box, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Typography} from "@mui/material";
+import {Avatar, Box, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Theme, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import {createStyles, makeStyles, withStyles, WithStyles} from "@mui/styles";
+import {makeStyles} from "@mui/styles";
+import logoWithWriting from "../../assets/images/logoWithWriting.png";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     menu: {
-        padding: '16px',
+        padding: theme.spacing(2),
     },
     menuItems: {
-        borderRadius: '10px',
-        height: '45px',
-        '&:hover': {
-            backgroundColor: '#E9DDFE',
-        },
+        '&.MuiMenuItem-root': {
+            borderRadius: '10px',
+            height: '45px',
+            '&:hover': {
+                backgroundColor: theme.palette.secondary.light,
+            },
+        }
     },
     userPaper: {
-        backgroundColor: '#6750A4',
-        margin: '16px',
-        padding: '16px',
+        "&.MuiPaper-root": {
+            backgroundColor: theme.palette.secondary.main,
+            padding: '16px',
+        }
     },
-})
+    logo: {
+        width: '-webkit-fill-available',
+    }
+}));
 
 interface AreaData {
     title: string;
@@ -116,12 +123,20 @@ const SidebarItems: React.FC = () => {
 
     return(
       <>
-          <Paper elevation={4}
-                 className={classes.userPaper}>
-              <Avatar variant="rounded">
-                  JH
-              </Avatar>
-          </Paper>
+          <Box mb={5}>
+              <img
+                  src={ logoWithWriting }
+                  className={classes.logo}
+              />
+          </Box>
+
+          <Box mb={5}>
+              <Paper elevation={4}
+                     className={classes.userPaper}>
+                  <Avatar variant="rounded">
+                  </Avatar>
+              </Paper>
+          </Box>
 
           <MenuList className={classes.menu}>
               <Box mb={5}>
@@ -145,7 +160,6 @@ const SidebarItems: React.FC = () => {
                   { displayAreaData(userAreaData) }
               </Box>
           </MenuList>
-
       </>
     );
 }

@@ -2,10 +2,23 @@ import React from 'react';
 import {Drawer, IconButton} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import SidebarItems from "./sidebarItems";
+import {makeStyles} from "@mui/styles";
 
+const useStyles = makeStyles({
+    drawer: {
+        '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: 300,
+            border: 'unset',
+            padding: '16px',
+            position: 'unset',
+        },
+    },
+});
 
 const Sidebar: React.FC = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const classes = useStyles();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -30,12 +43,12 @@ const Sidebar: React.FC = () => {
                 variant="temporary"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
+                className={classes.drawer}
                 ModalProps={{
                     keepMounted: true, // Better open performance on mobile.
                 }}
                 sx={{
                     display: { xs: 'block', sm: 'none' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300 },
                 }}
             >
                 <SidebarItems />
@@ -44,9 +57,9 @@ const Sidebar: React.FC = () => {
                 variant="permanent"
                 sx={{
                     display: { xs: 'none', sm: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300, border: 'unset' },
                 }}
                 open
+                className={classes.drawer}
             >
                 <SidebarItems />
             </Drawer>

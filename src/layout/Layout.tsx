@@ -1,14 +1,15 @@
 import React from "react";
 import {Box} from "@mui/material";
+import {Theme} from "@mui/material/styles";
 import Sidebar from "./sidebar/sidebar";
 import {makeStyles} from "@mui/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
     content: {
-        backgroundColor: '#F7F2FA',
+        backgroundColor: theme.palette.primary.main,
         borderRadius: '15px',
     },
-})
+}));
 
 const Layout: React.FC = (props) => {
     const { children } = props;
