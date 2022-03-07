@@ -10,7 +10,7 @@ const useStyles = makeStyles({
             boxSizing: 'border-box',
             width: 300,
             border: 'unset',
-            padding: '16px',
+            padding: '10px',
             position: 'unset',
         },
     },

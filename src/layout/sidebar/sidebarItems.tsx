@@ -1,34 +1,47 @@
-import React from "react";
-import PersonIcon from "@mui/icons-material/Person";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import {Avatar, Box, ListItemIcon, ListItemText, MenuItem, MenuList, Paper, Theme, Typography} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import PercentOutlinedIcon from '@mui/icons-material/PercentOutlined';
+import StraightenOutlinedIcon from '@mui/icons-material/StraightenOutlined';
+import ScaleOutlinedIcon from '@mui/icons-material/ScaleOutlined';
+import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import InsertChartOutlinedOutlinedIcon from '@mui/icons-material/InsertChartOutlinedOutlined';
+import MovingOutlinedIcon from '@mui/icons-material/MovingOutlined';
+
+import {
+    Avatar,
+    Box,
+    ListItemIcon,
+    ListItemText,
+    MenuItem,
+    MenuList,
+    Paper,
+    Typography
+} from "@mui/material";
 import {Link} from "react-router-dom";
-import {makeStyles} from "@mui/styles";
 import logoWithWriting from "../../assets/images/logoWithWriting.png";
 
-const useStyles = makeStyles((theme: Theme) => ({
-    menu: {
-        padding: theme.spacing(2),
-    },
+const styles = {
     menuItems: {
         '&.MuiMenuItem-root': {
             borderRadius: '10px',
             height: '45px',
             '&:hover': {
-                backgroundColor: theme.palette.secondary.light,
+                backgroundColor: 'action.hover',
             },
         }
     },
     userPaper: {
         "&.MuiPaper-root": {
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: 'secondary.main',
             padding: '16px',
         }
     },
     logo: {
         width: '-webkit-fill-available',
     }
-}));
+};
 
 interface AreaData {
     title: string;
@@ -37,77 +50,81 @@ interface AreaData {
 }
 
 const SidebarItems: React.FC = () => {
-
-    const  classes = useStyles();
+    const [selectedMenuItem, setSelectedMenuItem] = useState<any>(undefined);
 
     const bodyAreaData: AreaData[] = [
         {
             title: 'Gewicht',
-            icon: <PersonIcon />,
+            icon: <ScaleOutlinedIcon />,
             link: '/weight',
         },
         {
             title: 'KFA',
-            icon: <FitnessCenterIcon />,
+            icon: <PercentOutlinedIcon />,
             link: '/kfa',
         },
         {
             title: 'Umfänge',
-            icon: <FitnessCenterIcon />,
-            link: '',
+            icon: <StraightenOutlinedIcon />,
+            link: '/circumferences',
         },
         {
             title: 'Auswertung',
-            icon: <FitnessCenterIcon />,
-            link: '',
+            icon: <InsertChartOutlinedOutlinedIcon />,
+            link: 'bodyEvaluation',
         },
     ];
 
     const trainingAreaData: AreaData[] = [
         {
             title: 'Übungen',
-            icon: <PersonIcon />,
-            link: '',
+            icon: <FitnessCenterOutlinedIcon />,
+            link: 'exercises',
         },
         {
             title: 'Trainingspläne',
-            icon: <FitnessCenterIcon />,
-            link: '',
+            icon: <NewspaperOutlinedIcon />,
+            link: 'trainingPlans',
         },
         {
             title: 'Tagebuch',
-            icon: <FitnessCenterIcon />,
-            link: '',
+            icon: <AssignmentOutlinedIcon />,
+            link: 'trainingDiary',
         },
         {
             title: 'Auswertung',
-            icon: <FitnessCenterIcon />,
-            link: '',
+            icon: <InsertChartOutlinedOutlinedIcon />,
+            link: 'trainingEvaluation',
         },
     ];
 
     const userAreaData: AreaData[] = [
         {
             title: 'Profil',
-            icon: <PersonIcon />,
+            icon: <PersonOutlinedIcon />,
             link: '/user',
         },
         {
             title: 'Kraftwerte',
-            icon: <FitnessCenterIcon />,
-            link: '',
+            icon: <MovingOutlinedIcon />,
+            link: 'forceValues',
         },
     ];
 
     const displayAreaData = (areaData: AreaData[]) => {
         return(
-            areaData.map((value, key) => {
+            areaData.map((value) => {
                 return (
                     <MenuItem
-                        key={ key }
+                        key={ value.link }
                         component={ Link }
                         to={ value.link }
-                        className={classes.menuItems}
+                        sx={{
+                            ...styles.menuItems,
+                            backgroundColor: selectedMenuItem === value.link ? 'action.hover' : '',
+                        }
+                    }
+                        onClick={() => setSelectedMenuItem(value.link)}
                     >
                         <ListItemIcon>
                             { value.icon }
@@ -125,37 +142,38 @@ const SidebarItems: React.FC = () => {
       <>
           <Box mb={5}>
               <img
-                  src={ logoWithWriting }
-                  className={classes.logo}
+                  src={ logoWithWriting } style={styles.logo}
               />
           </Box>
 
           <Box mb={5}>
-              <Paper elevation={4}
-                     className={classes.userPaper}>
+              <Paper
+                  elevation={4}
+                  sx={styles.userPaper}
+              >
                   <Avatar variant="rounded">
                   </Avatar>
               </Paper>
           </Box>
 
-          <MenuList className={classes.menu}>
+          <MenuList>
               <Box mb={5}>
-                  <Typography>
+                  <Typography variant='caption'>
                       KÖRPERDATEN
                   </Typography>
                   { displayAreaData(bodyAreaData) }
               </Box>
 
               <Box mb={5}>
-                  <Typography>
-                      Training
+                  <Typography variant='caption'>
+                      TRAINING
                   </Typography>
                   { displayAreaData(trainingAreaData) }
               </Box>
 
               <Box mb={5}>
-                  <Typography>
-                      Benutzer
+                  <Typography variant='caption'>
+                      BENUTZER
                   </Typography>
                   { displayAreaData(userAreaData) }
               </Box>

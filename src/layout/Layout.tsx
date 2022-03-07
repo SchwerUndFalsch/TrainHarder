@@ -1,19 +1,18 @@
 import React from "react";
 import {Box} from "@mui/material";
-import {Theme} from "@mui/material/styles";
 import Sidebar from "./sidebar/sidebar";
-import {makeStyles} from "@mui/styles";
 
-const useStyles = makeStyles((theme: Theme) => ({
+const style = {
     content: {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: 'primary.main',
         borderRadius: '15px',
-    },
-}));
+        margin: 2,
+    }
+
+};
 
 const Layout: React.FC = (props) => {
     const { children } = props;
-    const classes = useStyles();
 
     return (
         <>
@@ -26,9 +25,10 @@ const Layout: React.FC = (props) => {
                 </Box>
 
                 <Box
-                    className={classes.content}
                     component="main"
-                    sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${300}px)` } }}
+                    sx={
+                        { ...style.content,flexGrow: 1, p: 3, width: { sm: `calc(100% - ${300}px)` } }
+                    }
                 >
                     { children }
                 </Box>
