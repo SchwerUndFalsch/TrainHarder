@@ -122,11 +122,22 @@ const SidebarItems: React.FC = () => {
                         sx={{
                             ...styles.menuItems,
                             backgroundColor: selectedMenuItem === value.link ? 'action.hover' : '',
+                            color: selectedMenuItem === value.link ? 'white' : 'black',
+                            '&:hover':{
+                                color: 'white',
+                                ".MuiListItemIcon-root": {
+                                    color: "white"
+                                }
+                            }
                         }
                     }
                         onClick={() => setSelectedMenuItem(value.link)}
                     >
-                        <ListItemIcon>
+                        <ListItemIcon
+                            sx={{
+                                color: selectedMenuItem === value.link ? 'white' : 'black',
+                            }}
+                        >
                             { value.icon }
                         </ListItemIcon>
                         <ListItemText>

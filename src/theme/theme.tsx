@@ -3,19 +3,15 @@ import {createTheme, responsiveFontSizes} from "@mui/material/styles";
 const theme = createTheme({
     palette: {
         primary: {
-            // main: '#eceef7',
-            main: '#f1edef'
+            main: '#edf2f4'
         },
         secondary: {
-            // main: '#80d8ff',
-            // light: 'rgba(171,237,255,0.42)',
-            main: '#7f77e0',
+            main: '#2b2d42',
         },
         background: {
-            // default: '#EFF1F3'
         },
         action: {
-            hover: 'rgba(127,119,224,0.27)',
+            hover: '#8d99ae'
         }
     },
     components: {
